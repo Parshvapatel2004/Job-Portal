@@ -3,6 +3,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import dotenv from "dotenv";
 import connectDB from "./Utils/db.js";
+import userRoute from "./routes/user.route.js";
 dotenv.config({});
 const app = express();
 
@@ -16,8 +17,12 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-const PORT = process.env.PORT ||  3000;
+const PORT = process.env.PORT || 3000;
+
+// apis
+app.use("/api/v1/user", userRoute);
+
 app.listen(PORT, () => {
-    connectDB();
+  connectDB();
   console.log(`Server running at port ${PORT}`);
 });
